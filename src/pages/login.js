@@ -41,6 +41,10 @@ const styles = {
     }
 };
 
+// const styles = (theme) => ({
+//     ...theme
+// });
+
 
 export class login extends Component {
 
@@ -69,6 +73,7 @@ export class login extends Component {
         axios.post('/login', userData)
             .then(res => {
                 console.log('login result: ', res.data);
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
                 this.setState({
                     loading: false
                 });
