@@ -1,6 +1,10 @@
 // Router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 // Token decoder
 import jwtDecode from 'jwt-decode';
 
@@ -40,20 +44,23 @@ if(authToken) {
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={home} />
-              <AuthRoute path="/login" component={login} authenticated={authenticated} />
-              <AuthRoute path="/signup" component={signup} authenticated={authenticated} />
-            </Switch>
+    <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <div className="App">
+            <Router>
+              <Navbar />
+              <div className="container">
+                <Switch>
+                  <Route exact path="/" component={home} />
+                  <AuthRoute path="/login" component={login} authenticated={authenticated} />
+                  <AuthRoute path="/signup" component={signup} authenticated={authenticated} />
+                </Switch>
+              </div>
+            </Router>
           </div>
-        </Router>
-      </div>
-    </MuiThemeProvider>
+        </MuiThemeProvider>
+    </Provider>
+    
   );
 }
 
