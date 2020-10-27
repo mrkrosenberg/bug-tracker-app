@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 // Mui Components
 import Grid from '@material-ui/core/Grid';
 
+// Components 
+import Post from '../components/Post';
+
 export class home extends Component {
+
+    state = {
+        posts: null
+    };
+
+    componentDidMount() {
+
+        axios.get('/posts')
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    posts: res.data
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
+
     render() {
+
+        let posts = this.state.posts ? (this.state.posts.map(post => <Post post={post}/>)) : <p>Loading...</p>;
+
         return (
             <Grid container spacing={10} >
                 <Grid 
@@ -12,9 +39,7 @@ export class home extends Component {
                     sm={8}
                     xs={12}
                 >
-                    <p>
-                        Content...
-                    </p>
+                    {posts}
                 </Grid>
                 <Grid 
                     item

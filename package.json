@@ -37,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy" : "https://us-central1-community-b86b1.cloudfunctions.net/api"
 }
