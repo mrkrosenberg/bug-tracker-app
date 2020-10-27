@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -11,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = {
     form: {
@@ -26,7 +28,16 @@ const styles = {
         margin: '10px auto 10px auto'
     },
     button: {
-        marginTop: 20
+        position: 'relative',
+        margin: '20px auto 20px auto'
+    },
+    customError: {
+        color: 'red',
+        fontSize: '0.8rem',
+        marginTop: 10
+    },
+    progress: {
+        position: 'absolute'
     }
 };
 
@@ -124,14 +135,33 @@ export class login extends Component {
                             onChange={this.handleChange}
                             fullWidth
                         />
+                        { errors.general && (
+                            <Typography 
+                                variant="body2"
+                                className={classes.customError}
+                            >
+                                {errors.general}
+                            </Typography>
+                        )}
                         <Button 
                             className={classes.button}
                             type="submit"
                             variant="contained"
                             color="primary"
+                            disabled={loading}
                         >
                             Login
+                            {loading && (
+                                <CircularProgress 
+                                    className={classes.progress} 
+                                    size={30}
+                                />
+                            )}
                         </Button>
+                        <br/>
+                        <small>
+                            don't have an account? sign up <Link to="/signup">here</Link>
+                        </small>
                     </form>
                 </Grid>
                 <Grid item sm />
