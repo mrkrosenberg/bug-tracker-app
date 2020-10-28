@@ -8,6 +8,9 @@ import dayjs from 'dayjs';
 import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../redux/actions/userActions';
 
+// Components
+import EditDetails from './EditDetails';
+
 // MUI Components
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -148,6 +151,7 @@ function Profile(props) {
                         <KeyboardReturn color="primary" />
                     </IconButton>
                 </Tooltip>
+                <EditDetails />
             </div>
         </Paper>
     ) : (
