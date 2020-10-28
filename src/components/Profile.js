@@ -21,6 +21,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 
 
 const styles = (theme) => ({
@@ -89,6 +90,12 @@ function Profile(props) {
         fileInput.click();
     };
 
+    const handleLogout = () => {
+
+        props.logoutUser();
+    };
+    
+    // Component markup
     let profileMarkup = !loading ? (authenticated ? (
         <Paper className={classes.paper}>
             <div className={classes.profile}>
@@ -136,6 +143,11 @@ function Profile(props) {
                     <CalendarToday color="primary" /> {' '}
                     <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                 </div>
+                <Tooltip title="Logout" placement="top">
+                    <IconButton onClick={handleLogout}>
+                        <KeyboardReturn color="primary" />
+                    </IconButton>
+                </Tooltip>
             </div>
         </Paper>
     ) : (
@@ -172,6 +184,6 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
     logoutUser, 
     uploadImage
-}
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Profile));

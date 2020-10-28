@@ -32,6 +32,8 @@ import Axios from 'axios';
 
 const theme = createMuiTheme(themeFile);
 
+
+// Determine auth state
 const authToken = localStorage.FBIdToken;
 
 if(authToken) {
