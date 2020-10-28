@@ -30,15 +30,15 @@ export class Navbar extends Component {
                     <Toolbar className="nav-container">
                         { authenticated ? (
                             <>
-                                <TheButton title="Create a Post">
+                                <TheButton tip="Create a Post">
                                     <AddIcon color="primary" />
                                 </TheButton>
                                 <Link to="/">
-                                    <TheButton title="Home">
+                                    <TheButton tip="Home">
                                         <HomeIcon color="primary" />
                                     </TheButton>
                                 </Link>
-                                <TheButton title="Notifications">
+                                <TheButton tip="Notifications">
                                     <Notifications color="primary" />
                                 </TheButton>
                             </>
