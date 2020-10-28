@@ -65,7 +65,8 @@ export class login extends Component {
 
         if(nextProps.UI.errors) {
             return { errors: nextProps.UI.errors }
-        }
+        };
+        return null;
     };
 
     handleSubmit = (e) => {
