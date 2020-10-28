@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 // Components 
 import Post from '../components/Post';
+import Profile from '../components/Profile';
 
 export class home extends Component {
 
@@ -46,9 +47,7 @@ export class home extends Component {
                     sm={4}
                     xs={12}
                 >
-                    <p>
-                        Profile...
-                    </p>
+                    <Profile />
                 </Grid>
             </Grid>
         )
