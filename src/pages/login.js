@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 // Redux
 import { connect } from 'react-redux';
@@ -62,16 +61,7 @@ export class login extends Component {
         };
     };
 
-    // componentDidUpdate(nextProps) {
-    //     console.log('next props: ', nextProps)
-    //     if(nextProps.UI.errors) {
-    //         this.setState({
-    //             errors: nextProps.UI.errors
-    //         });
-    //     };
-    // };
-
-    static getDerivedStateFromProps(nextProps, prevState) {
+    static getDerivedStateFromProps(nextProps) {
 
         if(nextProps.UI.errors) {
             return { errors: nextProps.UI.errors }
