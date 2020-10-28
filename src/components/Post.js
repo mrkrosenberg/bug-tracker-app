@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link }from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// Redux
+import { connect } from 'react-redux';
+import { likePost, unlikePost } from '../redux/actions/dataActions';
 
 // Date formatting
 import dayjs from 'dayjs';
@@ -60,4 +65,22 @@ function Post(props) {
     );
 };
 
-export default withStyles(styles)(Post);
+Post.propTypes = {
+    likePost: PropTypes.func.isRequired,
+    unlikePost: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    post: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+
+    user: state.user
+});
+
+const mapActionsToProps = {
+    likePost, 
+    unlikePost
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Post));

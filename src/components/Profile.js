@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 import dayjs from 'dayjs';
 
 // Redux
@@ -12,6 +11,7 @@ import { logoutUser, uploadImage } from '../redux/actions/userActions';
 import EditDetails from './EditDetails';
 
 // MUI Components
+import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import MuiLink from '@material-ui/core/Link';
@@ -137,7 +137,7 @@ function Profile(props) {
                     {website && (
                         <> 
                             <LinkIcon color="primary" />
-                            <a href={website} target="_blank" rel="noopener, noreferer">
+                            <a href={website} target="_blank" rel="noopener, noreferrer">
                                 {' '}{website}
                             </a>
                             <hr/>

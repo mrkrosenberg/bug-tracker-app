@@ -3,9 +3,9 @@ import { SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST } from '../types';
 import axios from 'axios';
 
 // Fetch all posts
-export const getPosts = () => (dispatch) {
+export const getPosts = () => (dispatch) => {
 
-    dispatchEvent({ type: LOADING_DATA });
+    dispatch({ type: LOADING_DATA });
     axios.get('/posts')
         .then(res => {
             dispatch({
@@ -18,11 +18,11 @@ export const getPosts = () => (dispatch) {
                 type: SET_POSTS,
                 payload: []
             })
-        })
+        });
 };
 
 // Like a post
-export const likePost = (postId) => {
+export const likePost = (postId) => (dispatch) => {
 
     axios.get(`/posts/${postId}/like`)
         .then(res => {
@@ -33,11 +33,11 @@ export const likePost = (postId) => {
         })
         .catch(err => {
             console.log(err);
-        })
+        });
 };
 
 // Unlike a post
-export const unlikePost = (postId) => {
+export const unlikePost = (postId) => (dispatch) => {
 
     axios.get(`/posts/${postId}/unlike`)
         .then(res => {
@@ -48,5 +48,5 @@ export const unlikePost = (postId) => {
         })
         .catch(err => {
             console.log(err);
-        })
+        });
 };
