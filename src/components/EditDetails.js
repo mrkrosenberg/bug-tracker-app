@@ -111,7 +111,7 @@ export class EditDetails extends Component {
 
         return (
             <>
-                <Tooltip title="Edit details" placement="top">
+                <Tooltip title="Edit profile" placement="top">
                     <IconButton onClick={this.handleOpen} className={classes.button}>
                         <EditIcon color="primary" />
                     </IconButton>

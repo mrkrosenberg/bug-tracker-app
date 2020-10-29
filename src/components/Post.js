@@ -53,12 +53,10 @@ function Post(props) {
     };
 
     const likeThePost = () => {
-        console.log('like post')
         props.likePost(props.post.postId);
     };
 
     const unlikeThePost = () => {
-        console.log('unlike post')
         props.unlikePost(props.post.postId);
     };
 
