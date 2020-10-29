@@ -1,4 +1,10 @@
-import { SET_POSTS, LOADING_DATA, LIKE_POST, UNLIKE_POST } from '../types';
+import { 
+    SET_POSTS, 
+    LOADING_DATA, 
+    LIKE_POST, 
+    UNLIKE_POST, 
+    DELETE_POST 
+} from '../types';
 
 import axios from 'axios';
 
@@ -49,5 +55,20 @@ export const unlikePost = (postId) => (dispatch) => {
         })
         .catch(err => {
             console.log(err);
+        });
+};
+
+// Delete post
+export const deletePost = (postId) => (dispatch) => {
+
+    axios.delete(`/posts/${postId}`)
+        .then(() => {
+            dispatch({
+                type: DELETE_POST,
+                payload: postId
+            })
+        })
+        .catch(err => {
+            console.log(err)
         });
 };

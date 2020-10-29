@@ -12,6 +12,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 // Components
 import TheButton from '../components/Button';
+import DeletePost from '../components/DeletePost';
 
 // MUI Components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -66,17 +67,17 @@ function Post(props) {
 
     const likedPost = () => {
 
-        if(props.user.likes && props.user.likes.find(like => like.postId === props.post.postId)) {
+        if(props.user.likes && props.user.likes.find(like => like.postId === postId)) {
             return true;
         } else return false;
     };
 
     const likeThePost = () => {
-        props.likePost(props.post.postId);
+        props.likePost(postId);
     };
 
     const unlikeThePost = () => {
-        props.unlikePost(props.post.postId);
+        props.unlikePost(postId);
     };
 
     // Render like or unlike button, redirect if not logged in
@@ -99,7 +100,9 @@ function Post(props) {
     );
 
     // Render delete button if current user's post
-    const deleteButton = authenticated && userHandle ===
+    const deleteButton = authenticated && userHandle === handle ? (
+        <DeletePost postId-={postId}/>
+    ) : null;
 
     dayjs.extend(relativeTime);
 
