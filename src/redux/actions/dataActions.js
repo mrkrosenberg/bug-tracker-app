@@ -26,6 +26,7 @@ export const likePost = (postId) => (dispatch) => {
 
     axios.get(`/posts/${postId}/like`)
         .then(res => {
+
             dispatch({
                 type: LIKE_POST,
                 payload: res.data

@@ -7,10 +7,15 @@ import { getPosts } from '../redux/actions/dataActions';
 
 // Mui Components
 import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // Components 
 import Post from '../components/Post';
 import Profile from '../components/Profile';
+
+const styles = {
+
+};
 
 export class home extends Component {
 
@@ -22,17 +27,18 @@ export class home extends Component {
 
     render() {
 
+        const { classes } = this.props;
         const { posts, loading } = this.props.data;
-        let postsMarkUp = !loading ? (posts.map(post => <Post key={post.postId} post={post}/>)) : <p>Loading...</p>;
+        let postsList = !loading ? (posts.map(post => <Post key={post.postId} post={post}/>)) : <p>Loading...</p>;
 
         return (
-            <Grid container spacing={10} >
+            <Grid className="grid-container" container spacing={10}>
                 <Grid 
                     item
                     sm={8}
                     xs={12}
                 >
-                    {postsMarkUp}
+                    {postsList}
                 </Grid>
                 <Grid 
                     item
@@ -60,4 +66,4 @@ const mapActionsToProps = {
     getPosts
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(home);
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(home));

@@ -10,12 +10,21 @@ import { likePost, unlikePost } from '../redux/actions/dataActions';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+// Components
+import TheButton from '../components/Button';
+
 // MUI Components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+
+// Icons
+import ChatIcon from '@material-ui/icons/Chat';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { FavoriteBorderSharp } from '@material-ui/icons';
 
 // Style
 const styles = {
@@ -34,7 +43,43 @@ const styles = {
 
 function Post(props) {
 
-    const { classes, post : { body, createdAt, userImage, userHandle, postId, likeCount, commentCount } } = props;
+    const { classes, post : { body, createdAt, userImage, userHandle, postId, likeCount, commentCount }, user: { authenticated } } = props;
+
+    const likedPost = () => {
+
+        if(props.user.likes && props.user.likes.find(like => like.postId === props.post.postId)) {
+            return true;
+        } else return false;
+    };
+
+    const likeThePost = () => {
+        console.log('like post')
+        props.likePost(props.post.postId);
+    };
+
+    const unlikeThePost = () => {
+        console.log('unlike post')
+        props.unlikePost(props.post.postId);
+    };
+
+    // Render like or unlike button, redirect if not logged in
+    const likeButton = !authenticated ? (
+        <TheButton tip="like">
+            <Link to="/login">
+                <FavoriteBorderSharp color="primary" />
+            </Link>
+        </TheButton>
+    ) : (
+        likedPost() ? (
+            <TheButton tip="Unlike" onClick={unlikeThePost}>
+                <FavoriteIcon color="primary" />
+            </TheButton>
+        ) : (
+            <TheButton tip="Like" onClick={likeThePost}>
+                <FavoriteBorder color="primary" />
+            </TheButton>
+        )
+    );
 
     dayjs.extend(relativeTime);
 
@@ -60,6 +105,12 @@ function Post(props) {
                 <Typography variant="body1" color="textSecondary" >
                     {body}
                 </Typography>
+                {likeButton}
+                <span>{likeCount} Likes</span>
+                <TheButton tip="comments">
+                    <ChatIcon color="primary" />
+                </TheButton>
+                <span>{commentCount} Comments</span>
             </CardContent>
         </Card>
     );

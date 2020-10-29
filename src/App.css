@@ -22,3 +22,10 @@ body {
 a {
   text-decoration: none;
 }
+
+.grid-container {
+  background-image: url('./images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

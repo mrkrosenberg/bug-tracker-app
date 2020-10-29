@@ -110,7 +110,7 @@ export class signup extends Component {
                         variant="h2" 
                         className={classes.pageTitle} 
                     >
-                        signup
+                        Sign Up
                     </Typography>
                     <form noValidate onSubmit={this.handleSubmit}>
                         <TextField 

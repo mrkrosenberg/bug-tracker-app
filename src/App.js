@@ -28,7 +28,6 @@ import themeFile from './styles/globalStyles';
 // import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
-import Axios from 'axios';
 
 const theme = createMuiTheme(themeFile);
 
@@ -39,6 +38,7 @@ const authToken = localStorage.FBIdToken;
 if(authToken) {
 
     const decodedToken = jwtDecode(authToken);
+    
     if(decodedToken.exp * 1000 < Date.now()) {
       // logs user out and deletes token from local storage if expired
       store.dispatch(logoutUser());

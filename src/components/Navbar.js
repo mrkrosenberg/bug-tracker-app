@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import Button from './Button';
+import IconButton from './Button';
 
 // MUI Components
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import TheButton from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 
 // Icons
 import AddIcon from '@material-ui/icons/Add';
@@ -30,21 +30,21 @@ export class Navbar extends Component {
                     <Toolbar className="nav-container">
                         { authenticated ? (
                             <>
-                                <TheButton tip="Create a Post">
+                                <IconButton tip="Create a Post">
                                     <AddIcon color="primary" />
-                                </TheButton>
+                                </IconButton>
                                 <Link to="/">
-                                    <TheButton tip="Home">
+                                    <IconButton tip="Home">
                                         <HomeIcon color="primary" />
-                                    </TheButton>
+                                    </IconButton>
                                 </Link>
-                                <TheButton tip="Notifications">
+                                <IconButton tip="Notifications">
                                     <Notifications color="primary" />
-                                </TheButton>
+                                </IconButton>
                             </>
                             ) : (
                             <>
-                                <Button 
+                                <Button
                                     color="inherit" 
                                     component={Link} 
                                     to="/"    
