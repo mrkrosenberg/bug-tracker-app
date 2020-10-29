@@ -77,7 +77,22 @@ const styles = (theme) => ({
 
 function Profile(props) {
 
-    const { classes, user: { credentials: { handle, createdAt, imageUrl, bio, website, location }, loading, authenticated }} = props;
+    // Destructured props
+    const { 
+        classes, 
+        user: { 
+            credentials: { 
+                handle, 
+                createdAt, 
+                imageUrl, 
+                bio, 
+                website, 
+                location 
+            }, 
+            loading, 
+            authenticated 
+        }
+    } = props;
 
     const handleImageChange = (e) => {
 

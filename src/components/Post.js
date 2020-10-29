@@ -43,7 +43,26 @@ const styles = {
 
 function Post(props) {
 
-    const { classes, post : { body, createdAt, userImage, userHandle, postId, likeCount, commentCount }, user: { authenticated } } = props;
+    // Destructured props
+    const { 
+        classes, 
+        post: 
+            { 
+                body, 
+                createdAt, 
+                userImage, 
+                userHandle, 
+                postId, 
+                likeCount, 
+                commentCount 
+            }, 
+        user: { 
+                authenticated, 
+                credentials: { 
+                    handle 
+                } 
+        } 
+    } = props;
 
     const likedPost = () => {
 
@@ -79,6 +98,9 @@ function Post(props) {
         )
     );
 
+    // Render delete button if current user's post
+    const deleteButton = authenticated && userHandle ===
+
     dayjs.extend(relativeTime);
 
     return (
@@ -97,6 +119,7 @@ function Post(props) {
                 >
                     {userHandle}
                 </Typography>
+                {deleteButton}
                 <Typography variant="body2" color="textSecondary" >
                     {dayjs(createdAt).fromNow()}
                 </Typography>
