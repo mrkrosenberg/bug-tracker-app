@@ -30,6 +30,7 @@ import { FavoriteBorderSharp } from '@material-ui/icons';
 // Style
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20, 
     },

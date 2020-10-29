@@ -20,13 +20,17 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline';
 
 // Style
 const styles = {
-
+    deleteButton: {
+        position: 'absolute',
+        top: '10%',
+        left: '90%',
+    }
 };
 
 function DeletePost(props) {
 
     const [ open, setOpen ] = useState(false);
-    const { classes } = this.props;
+    const { classes } = props;
 
     const handleOpen = () => {
 
