@@ -2,7 +2,8 @@ import {
     SET_POSTS, 
     LIKE_POST, 
     UNLIKE_POST, 
-    LOADING_DATA, 
+    LOADING_DATA,
+    CREATE_POST, 
     DELETE_POST 
 } from '../types';
 
@@ -32,6 +33,14 @@ export default function(state = initialState, action) {
             state.posts[index] = action.payload;
             return {
                 ...state
+            };
+        case CREATE_POST:
+            return {
+                ...state, 
+                posts: [
+                    action.payload,
+                    ...state.posts
+                ]
             };
         case DELETE_POST:
             index = state.posts.findIndex(post => post.postId === action.payload);
