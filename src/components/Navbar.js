@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // Components
 import IconButton from './Button';
+import CreatePost from './CreatePost';
 
 // MUI Components
 import AppBar from '@material-ui/core/AppBar';
@@ -14,7 +15,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 // Icons
-import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import Notifications from '@material-ui/icons/Notifications';
 
@@ -30,9 +30,7 @@ export class Navbar extends Component {
                     <Toolbar className="nav-container">
                         { authenticated ? (
                             <>
-                                <IconButton tip="Create a Post">
-                                    <AddIcon color="primary" />
-                                </IconButton>
+                                <CreatePost />
                                 <Link to="/">
                                     <IconButton tip="Home">
                                         <HomeIcon color="primary" />

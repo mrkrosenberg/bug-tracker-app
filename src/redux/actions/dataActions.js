@@ -1,9 +1,10 @@
 import { 
     SET_POSTS, 
-    LOADING_DATA, 
+    LOADING_DATA,
+    CREATE_POST, 
     LIKE_POST, 
     UNLIKE_POST, 
-    DELETE_POST 
+    DELETE_POST, LOADING_UI 
 } from '../types';
 
 import axios from 'axios';
@@ -25,6 +26,18 @@ export const getPosts = () => (dispatch) => {
                 payload: []
             })
         });
+};
+
+// Create a new post
+export const createPost = (newPost) => {
+
+    dispatch({ type: LOADING_UI });
+    axios.post('/posts', newPost)
+        .then(res => {
+            dispatch({
+                type: CREATE_POST
+            })
+        })
 };
 
 // Like a post
