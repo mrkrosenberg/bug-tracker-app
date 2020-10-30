@@ -39,6 +39,7 @@ function DeletePost(props) {
 
     const deletePost = () => {
 
+        console.log('props id: ', props.postId)
         props.deletePost(props.postId);
         handleOpen();
     };

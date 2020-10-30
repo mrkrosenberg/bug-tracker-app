@@ -60,8 +60,14 @@ export class CreatePost extends Component {
 
     handleOpen = () => {
 
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+
         this.setState({
-            open: !this.state.open
+            open: false,
+            errors: {}
         });
     };
 
@@ -96,7 +102,7 @@ export class CreatePost extends Component {
                     fullWidth
                     maxWidth="sm"
                 >
-                    <TheButton tip="Close" onClick={this.handleOpen} tipClassName={classes.closeButton}>
+                    <TheButton tip="Close" onClick={this.handleClose} tipClassName={classes.closeButton}>
                         <CloseIcon />
                     </TheButton>
                     <DialogTitle>

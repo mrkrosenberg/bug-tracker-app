@@ -102,7 +102,7 @@ function Post(props) {
 
     // Render delete button if current user's post
     const deleteButton = authenticated && userHandle === handle ? (
-        <DeletePost postId-={postId}/>
+        <DeletePost postId={postId}/>
     ) : null;
 
     dayjs.extend(relativeTime);
