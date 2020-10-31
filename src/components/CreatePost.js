@@ -50,11 +50,23 @@ export class CreatePost extends Component {
         errors: {}
     };
 
+    handleStateChange = () => {
+        this.setState({
+            body: ''
+        })
+    };
+
     static getDerivedStateFromProps(nextProps) {
 
-        if(nextProps.UI.errors) {
+        if(!nextProps.UI.errors && !nextProps.UI.loading) {
+            // this.handleStateChange();
+            this.handleClose();
+        } else if(nextProps.UI.errors) {
             return { errors: nextProps.UI.errors }
-        };
+        }
+        // if(nextProps.UI.errors) {
+        //     return { errors: nextProps.UI.errors }
+        // };
         return null;
     };
 
