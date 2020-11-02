@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // Redux
 import { connect } from 'react-redux';
-import { createPost, clearErrors } from '../redux/actions/dataActions';
+import { createPost } from '../redux/actions/dataActions';
 
 // Components
 import TheButton from './Button';
@@ -47,22 +47,17 @@ export class CreatePost extends Component {
     state = {
         open: false,
         body: '',
-        errors: {}
+        errors: {},
+        submitted: false
     };
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-
-    //     console.log('derived next props: ', nextProps);
-    //     console.log('derived prev state: ', prevState);
+    static getDerivedStateFromProps(nextProps, prevState) {
         
-    //     if(nextProps.UI.errors) {
-    //         return { errors: nextProps.UI.errors }
-    //     } 
-    //     // else {
-    //     //     return { errors: {} }
-    //     // }
-    //     return null;
-    // };
+        if(!prevState.errors && nextProps.UI.errors) {
+            return { errors: nextProps.UI.errors }
+        } 
+        return null;
+    };
 
     componentDidUpdate(prevProps) {
 
@@ -70,7 +65,9 @@ export class CreatePost extends Component {
             this.setState({
                 errors: this.props.UI.errors
             })
-        } 
+        } else if (this.state.body && this.state.submitted) {
+            this.handleClose();
+        }
     };  
 
     handleOpen = () => {
@@ -85,9 +82,9 @@ export class CreatePost extends Component {
         this.setState({
             open: false,
             body: '',
-            errors: {}
+            errors: {},
+            submitted: false
         });
-        this.props.clearErrors();
     };
 
     handleChange = (e) => {
@@ -100,6 +97,9 @@ export class CreatePost extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
+        this.setState({
+            submitted: true
+        })
         this.props.createPost({ 
             body: this.state.body
         });
@@ -108,10 +108,7 @@ export class CreatePost extends Component {
     render() {
 
         const { errors } = this.state;
-        const { classes, UI: { loading }} = this.props;
-
-        console.log('posts: ', posts)
-        
+        const { classes, UI: { loading }} = this.props;        
 
         return (
             <>
@@ -174,8 +171,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-    createPost,
-    clearErrors
+    createPost
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CreatePost));
