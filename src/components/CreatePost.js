@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // Redux
 import { connect } from 'react-redux';
-import { createPost } from '../redux/actions/dataActions';
+import { createPost, clearErrors } from '../redux/actions/dataActions';
 
 // Components
 import TheButton from './Button';
@@ -30,7 +30,8 @@ const styles = theme => ({
     submitButton: {
         position: 'relative',
         marginTop: '15px',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        float: 'right'
     },
     progressSpinner: {
         position: 'absolute'
@@ -65,9 +66,11 @@ export class CreatePost extends Component {
             this.setState({
                 errors: this.props.UI.errors
             })
-        } else if (this.state.body && this.state.submitted) {
-            this.handleClose();
-        }
+        } 
+        // else if (!this.state.errors) {
+        //     // this.handleClose();
+        //     console.log('shit')
+        // }
     };  
 
     handleOpen = () => {
@@ -85,6 +88,7 @@ export class CreatePost extends Component {
             errors: {},
             submitted: false
         });
+        this.props.clearErrors();
     };
 
     handleChange = (e) => {
@@ -171,7 +175,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-    createPost
+    createPost,
+    clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CreatePost));
