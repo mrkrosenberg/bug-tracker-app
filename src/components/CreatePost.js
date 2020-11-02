@@ -48,30 +48,33 @@ export class CreatePost extends Component {
     state = {
         open: false,
         body: '',
-        errors: {},
-        submitted: false
+        errors: {}
     };
 
-    static getDerivedStateFromProps(nextProps, prevState) {
+    // static getDerivedStateFromProps(nextProps, prevState) {
+
+    //     // console.log('prev state: ', prevState)
+    //     // console.log('next props: ', nextProps)
         
-        if(!prevState.errors && nextProps.UI.errors) {
-            return { errors: nextProps.UI.errors }
-        } 
-        return null;
-    };
+    //     if(!prevState.errors && nextProps.UI.errors) {
+    //         return { errors: nextProps.UI.errors }
+    //     } 
+    //     return null;
+    // };
 
-    componentDidUpdate(prevProps) {
+    // componentDidUpdate(prevProps) {
 
-        if(prevProps.UI.errors !== this.props.UI.errors) {
-            this.setState({
-                errors: this.props.UI.errors
-            })
-        } 
-        // else if (!this.state.errors) {
-        //     // this.handleClose();
-        //     console.log('shit')
-        // }
-    };  
+    //     // console.log('updating')
+    //     if(prevProps.UI.errors !== this.props.UI.errors) {
+    //         this.setState({
+    //             errors: this.props.UI.errors
+    //         })
+    //     } 
+    //     else if () {
+    //         this.handleClose();
+    //         console.log('shit')
+    //     }
+    // };  
 
     handleOpen = () => {
 
@@ -101,9 +104,7 @@ export class CreatePost extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        this.setState({
-            submitted: true
-        })
+        this.handleClose();
         this.props.createPost({ 
             body: this.state.body
         });
@@ -133,7 +134,8 @@ export class CreatePost extends Component {
                     </DialogTitle>
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
-                            <TextField  
+                            <TextField 
+                                required 
                                 className={classes.textField}
                                 name="body"
                                 type="text"

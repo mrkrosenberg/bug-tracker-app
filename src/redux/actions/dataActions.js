@@ -12,11 +12,6 @@ import {
 
 import axios from 'axios';
 
-export const clearErrors = () =>  (dispatch) => {
-
-    console.log('clearing errors')
-    dispatch({ type: CLEAR_ERRORS })
-};
 
 // Fetch all posts
 export const getPosts = () => (dispatch) => {
@@ -101,4 +96,10 @@ export const deletePost = (postId) => (dispatch) => {
         .catch(err => {
             console.log(err)
         });
+};
+
+// Clear errors from global state
+export const clearErrors = () =>  (dispatch) => {
+
+    dispatch({ type: CLEAR_ERRORS })
 };
