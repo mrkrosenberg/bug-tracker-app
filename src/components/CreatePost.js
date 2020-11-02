@@ -47,8 +47,7 @@ export class CreatePost extends Component {
     state = {
         open: false,
         body: '',
-        errors: {},
-        posts: []
+        errors: {}
     };
 
     // static getDerivedStateFromProps(nextProps, prevState) {
@@ -65,7 +64,7 @@ export class CreatePost extends Component {
     //     return null;
     // };
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
 
         if(prevProps.UI.errors !== this.props.UI.errors) {
             this.setState({
@@ -109,7 +108,7 @@ export class CreatePost extends Component {
     render() {
 
         const { errors } = this.state;
-        const { classes, UI: { loading }, data: {posts}} = this.props;
+        const { classes, UI: { loading }} = this.props;
 
         console.log('posts: ', posts)
         
@@ -172,7 +171,6 @@ CreatePost.propTypes = {
 
 const mapStateToProps = (state) => ({
     UI: state.UI,
-    data: state.data
 });
 
 const mapActionsToProps = {
