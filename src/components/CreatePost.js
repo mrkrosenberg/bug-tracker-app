@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // Redux
 import { connect } from 'react-redux';
-import { createPost } from '../redux/actions/dataActions';
+import { createPost, clearErrors } from '../redux/actions/dataActions';
 
 // Components
 import TheButton from './Button';
@@ -47,40 +47,48 @@ export class CreatePost extends Component {
     state = {
         open: false,
         body: '',
-        errors: {}
+        errors: {},
+        posts: []
     };
 
-    handleStateChange = () => {
-        this.setState({
-            body: ''
-        })
-    };
+    // static getDerivedStateFromProps(nextProps, prevState) {
 
-    static getDerivedStateFromProps(nextProps) {
+    //     console.log('derived next props: ', nextProps);
+    //     console.log('derived prev state: ', prevState);
+        
+    //     if(nextProps.UI.errors) {
+    //         return { errors: nextProps.UI.errors }
+    //     } 
+    //     // else {
+    //     //     return { errors: {} }
+    //     // }
+    //     return null;
+    // };
 
-        if(!nextProps.UI.errors && !nextProps.UI.loading) {
-            // this.handleStateChange();
-            this.handleClose();
-        } else if(nextProps.UI.errors) {
-            return { errors: nextProps.UI.errors }
-        }
-        // if(nextProps.UI.errors) {
-        //     return { errors: nextProps.UI.errors }
-        // };
-        return null;
-    };
+    componentDidUpdate(prevProps, prevState) {
+
+        if(prevProps.UI.errors !== this.props.UI.errors) {
+            this.setState({
+                errors: this.props.UI.errors
+            })
+        } 
+    };  
 
     handleOpen = () => {
 
-        this.setState({ open: true });
+        this.setState({ 
+            open: true 
+        });
     };
 
     handleClose = () => {
 
         this.setState({
             open: false,
+            body: '',
             errors: {}
         });
+        this.props.clearErrors();
     };
 
     handleChange = (e) => {
@@ -101,7 +109,10 @@ export class CreatePost extends Component {
     render() {
 
         const { errors } = this.state;
-        const { classes, UI: { loading }} = this.props;
+        const { classes, UI: { loading }, data: {posts}} = this.props;
+
+        console.log('posts: ', posts)
+        
 
         return (
             <>
@@ -130,8 +141,8 @@ export class CreatePost extends Component {
                                 multiline
                                 rows="3"
                                 placeholder="Enter text here"
-                                error={errors.body ? true : false}
-                                helperText={errors.body}
+                                error={errors?.body ? true : false}
+                                helperText={errors?.body}
                                 onChange={this.handleChange}
                                 fullWidth
                             />
@@ -160,11 +171,13 @@ CreatePost.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    UI: state.UI
+    UI: state.UI,
+    data: state.data
 });
 
 const mapActionsToProps = {
-    createPost
+    createPost,
+    clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CreatePost));

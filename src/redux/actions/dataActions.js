@@ -12,6 +12,12 @@ import {
 
 import axios from 'axios';
 
+export const clearErrors = () =>  (dispatch) => {
+
+    console.log('clearing errors')
+    dispatch({ type: CLEAR_ERRORS })
+};
+
 // Fetch all posts
 export const getPosts = () => (dispatch) => {
 
