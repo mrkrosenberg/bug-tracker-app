@@ -34,11 +34,11 @@ function LikeButton(props) {
 
     // Render like or unlike button, redirect if not logged in
     const likeButtonMarkup = !authenticated ? (
-        <TheButton tip="like">
-            <Link to="/login">
-                <FavoriteBorder color="primary" />
-            </Link>
-        </TheButton>
+        <Link to="/login">
+            <TheButton tip="like">
+                    <FavoriteBorder color="primary" />
+            </TheButton>
+        </Link>
     ) : (
         likedPost() ? (
             <TheButton tip="Unlike" onClick={unlikeThePost}>
