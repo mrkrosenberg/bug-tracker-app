@@ -53,9 +53,6 @@ export class CreatePost extends Component {
     };
 
     // static getDerivedStateFromProps(nextProps, prevState) {
-
-    //     // console.log('prev state: ', prevState)
-    //     // console.log('next props: ', nextProps)
         
     //     if(!prevState.errors && nextProps.UI.errors) {
     //         return { errors: nextProps.UI.errors }
@@ -65,16 +62,13 @@ export class CreatePost extends Component {
 
     componentDidUpdate(prevProps) {
 
-        // console.log('updating')
         if(prevProps.UI.errors !== this.props.UI.errors) {
             this.setState({
                 errors: this.props.UI.errors,
                 submitted: true
             })
-        } 
-        else if (this.props.posts.length > prevProps.posts.length) {
+        } else if (this.props.posts.length > prevProps.posts.length) {
             this.handleClose();
-            console.log('shit')
         }
     };  
 
@@ -115,10 +109,8 @@ export class CreatePost extends Component {
     render() {
 
         const { errors } = this.state;
-        const { classes, UI: { loading }, posts } = this.props;  
+        const { classes, UI: { loading }} = this.props;  
         
-        console.log('posts: ', posts)
-
         return (
             <>
                 <TheButton onClick={this.handleOpen} tip="Create a post">
