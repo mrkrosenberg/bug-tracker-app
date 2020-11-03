@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -66,107 +66,98 @@ const styles = {
         marginBottom: 50
     }
 };
+function PostDialog(props) {
 
-class PostDialog extends Component {
 
-    state = {
-        open: false
+    const [ open, setOpen ] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+        props.getPost(props.postId);
     };
 
-    handleOpen = () => {
-        this.setState({
-            open: true
-        });
-        this.props.getPost(this.props.postId);
-    };
-
-    handleClose = () => {
-        this.setState({
-            open: false
-        });
+    const handleClose = () => {
+        setOpen(false)
     };
 
 
-    render() {
+    const { 
+        classes, 
+        post:  { 
+            postId, 
+            body, 
+            createdAt, 
+            likeCount, 
+            commentCount, 
+            userImage, 
+            userHandle,
+            comments
+        }, 
+        UI: { loading }
+    } = props;
 
-        const { 
-            classes, 
-            post:  { 
-                postId, 
-                body, 
-                createdAt, 
-                likeCount, 
-                commentCount, 
-                userImage, 
-                userHandle,
-                comments
-            }, 
-            UI: { loading }
-        } = this.props;
-
-        // Render spinner or post dialog content
-        const dialogMarkup = loading ? (
-            <div className={classes.spinnerDiv}>
-                <CircularProgress size={200} thickness={2} />
-            </div>
-        ) : (
-            <Grid container spacing={10}>
-                <Grid item sm={5}>
-                    <img src={userImage} alt="Profile" className={classes.profileImage}/>
-                </Grid>
-                <Grid item sm={7} className={classes.contentContainer}>
-                    <Typography
-                        component={Link}
-                        to={`/users/${userHandle}`}
-                        color="primary"
-                        variant="h5"
-                    >
-                        @{userHandle}
-                    </Typography>
-                    <hr className={classes.invisibleSeparator} />
-                    <Typography variant="body2" color="textSecondary">
-                        {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
-                    </Typography>
-                    <hr className={classes.invisibleSeparator} />
-                    <Typography variant="body1">
-                        {body}
-                    </Typography>
-                    <LikeButton postId={postId} />
-                    <span>{likeCount} likes</span>
-                    <TheButton tip="comments">
-                        <ChatIcon color="primary" />
-                    </TheButton>
-                    <span>{commentCount} Comments</span>
-                </Grid>
-                <hr className={classes.visibleSeparator}/>
-                <Comments comments={comments} />
+    // Render spinner or post dialog content
+    const dialogMarkup = loading ? (
+        <div className={classes.spinnerDiv}>
+            <CircularProgress size={200} thickness={2} />
+        </div>
+    ) : (
+        <Grid container spacing={10}>
+            <Grid item sm={5}>
+                <img src={userImage} alt="Profile" className={classes.profileImage}/>
             </Grid>
-        )
+            <Grid item sm={7} className={classes.contentContainer}>
+                <Typography
+                    component={Link}
+                    to={`/users/${userHandle}`}
+                    color="primary"
+                    variant="h5"
+                >
+                    @{userHandle}
+                </Typography>
+                <hr className={classes.invisibleSeparator} />
+                <Typography variant="body2" color="textSecondary">
+                    {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
+                </Typography>
+                <hr className={classes.invisibleSeparator} />
+                <Typography variant="body1">
+                    {body}
+                </Typography>
+                <LikeButton postId={postId} />
+                <span>{likeCount} likes</span>
+                <TheButton tip="comments">
+                    <ChatIcon color="primary" />
+                </TheButton>
+                <span>{commentCount} Comments</span>
+            </Grid>
+            <hr className={classes.visibleSeparator}/>
+            <Comments comments={comments} />
+        </Grid>
+    )
 
-        return (
-            <>
-            <TheButton onClick={this.handleOpen} tip="Expand post" tipClassName={classes.expandButton}>
-                <UnfoldMore color="primary" />
-            </TheButton>
-            <Dialog
-                open={this.state.open} 
-                onClose={this.handleClose}
-                fullWidth
-                maxWidth="sm"
-            >
-               <TheButton tip="Close" onClick={this.handleClose} tipClassName={classes.closeButton}>
-                    <CloseIcon />
-                </TheButton> 
-                <DialogContent className={classes.dialogContent}>
-                    {dialogMarkup}
-                </DialogContent>
-            </Dialog>
-            </>
-        )
-
-    };
+    return (
+        <>
+        <TheButton onClick={handleOpen} tip="Expand post" tipClassName={classes.expandButton}>
+            <UnfoldMore color="primary" />
+        </TheButton>
+        <Dialog
+            open={open} 
+            onClose={handleClose}
+            fullWidth
+            maxWidth="sm"
+        >
+            <TheButton tip="Close" onClick={handleClose} tipClassName={classes.closeButton}>
+                <CloseIcon />
+            </TheButton> 
+            <DialogContent className={classes.dialogContent}>
+                {dialogMarkup}
+            </DialogContent>
+        </Dialog>
+        </>
+    )
 
 };
+
 
 PostDialog.propTypes = {
     getPost: PropTypes.func.isRequired,
