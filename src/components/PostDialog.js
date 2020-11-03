@@ -155,7 +155,6 @@ function PostDialog(props) {
         </Dialog>
         </>
     )
-
 };
 
 

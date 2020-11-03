@@ -40,7 +40,9 @@ export default function(state = initialState, action) {
             index = state.posts.findIndex((post) => post.postId === action.payload.postId);
             state.posts[index] = action.payload;
             if(state.post.postId === action.payload.postId) {
-                state.post = action.payload
+                let comments = state.post.comments;
+                state.post = action.payload;
+                state.post.comments = comments;
             }
             return {
                 ...state

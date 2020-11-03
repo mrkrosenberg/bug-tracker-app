@@ -39,7 +39,8 @@ function Comments(props) {
 
     return (
         <Grid container>
-            { comments.map(comment => {
+            { comments && comments.map(comment => {
+                
                 const { body, createdAt, userImage, userHandle } = comment;
                 return (
                     <Fragment key={createdAt}>
