@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { likePost, unlikePost } from '../redux/actions/dataActions';
 
 // Date formatting
 import dayjs from 'dayjs';
@@ -14,6 +13,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import TheButton from './Button';
 import DeletePost from './DeletePost';
 import PostDialog from './PostDialog';
+import LikeButton from './LikeButton';
 
 // MUI Components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -26,7 +26,6 @@ import Typography from '@material-ui/core/Typography';
 import ChatIcon from '@material-ui/icons/Chat';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import { FavoriteBorderSharp } from '@material-ui/icons';
 
 // Style
 const styles = {
@@ -67,46 +66,13 @@ function Post(props) {
         } 
     } = props;
 
-    const likedPost = () => {
-
-        if(props.user.likes && props.user.likes.find(like => like.postId === postId)) {
-            return true;
-        } else return false;
-    };
-
-    const likeThePost = () => {
-        props.likePost(postId);
-    };
-
-    const unlikeThePost = () => {
-        props.unlikePost(postId);
-    };
-
-    // Render like or unlike button, redirect if not logged in
-    const likeButton = !authenticated ? (
-        <TheButton tip="like">
-            <Link to="/login">
-                <FavoriteBorderSharp color="primary" />
-            </Link>
-        </TheButton>
-    ) : (
-        likedPost() ? (
-            <TheButton tip="Unlike" onClick={unlikeThePost}>
-                <FavoriteIcon color="primary" />
-            </TheButton>
-        ) : (
-            <TheButton tip="Like" onClick={likeThePost}>
-                <FavoriteBorder color="primary" />
-            </TheButton>
-        )
-    );
+    dayjs.extend(relativeTime);
 
     // Render delete button if current user's post
-    const deleteButton = authenticated && userHandle === handle ? (
+    const deleteButtonMarkup = authenticated && userHandle === handle ? (
         <DeletePost postId={postId}/>
     ) : null;
 
-    dayjs.extend(relativeTime);
 
     return (
         <Card className={classes.card}>
@@ -124,14 +90,14 @@ function Post(props) {
                 >
                     {userHandle}
                 </Typography>
-                {deleteButton}
+                {deleteButtonMarkup}
                 <Typography variant="body2" color="textSecondary" >
                     {dayjs(createdAt).fromNow()}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" >
                     {body}
                 </Typography>
-                {likeButton}
+                <LikeButton postId={postId} />
                 <span>{likeCount} Likes</span>
                 <TheButton tip="comments">
                     <ChatIcon color="primary" />
@@ -144,8 +110,6 @@ function Post(props) {
 };
 
 Post.propTypes = {
-    likePost: PropTypes.func.isRequired,
-    unlikePost: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired
@@ -156,9 +120,5 @@ const mapStateToProps = (state) => ({
     user: state.user
 });
 
-const mapActionsToProps = {
-    likePost, 
-    unlikePost
-};
 
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Post));
+export default connect(mapStateToProps)(withStyles(styles)(Post));
