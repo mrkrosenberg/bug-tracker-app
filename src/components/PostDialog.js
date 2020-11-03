@@ -9,23 +9,20 @@ import { getPost } from '../redux/actions/dataActions';
 
 // Components
 import TheButton from './Button';
+import LikeButton from './LikeButton';
+
 
 // MUI components
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close';
-import UnfoldMore from '@material-ui/icons/UnfoldMore'
+import UnfoldMore from '@material-ui/icons/UnfoldMore';
+import ChatIcon from '@material-ui/icons/Chat';
 
 // Date formatting
 import dayjs from 'dayjs';
@@ -128,6 +125,12 @@ class PostDialog extends Component {
                     <Typography variant="body1">
                         {body}
                     </Typography>
+                    <LikeButton postId={postId} />
+                    <span>{likeCount} likes</span>
+                    <TheButton tip="comments">
+                        <ChatIcon color="primary" />
+                    </TheButton>
+                    <span>{commentCount} Comments</span>
                 </Grid>
             </Grid>
         )
