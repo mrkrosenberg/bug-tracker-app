@@ -48,7 +48,8 @@ export class CreatePost extends Component {
     state = {
         open: false,
         body: '',
-        errors: {}
+        errors: {},
+        submitted: false
     };
 
     // static getDerivedStateFromProps(nextProps, prevState) {
@@ -62,19 +63,20 @@ export class CreatePost extends Component {
     //     return null;
     // };
 
-    // componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
 
-    //     // console.log('updating')
-    //     if(prevProps.UI.errors !== this.props.UI.errors) {
-    //         this.setState({
-    //             errors: this.props.UI.errors
-    //         })
-    //     } 
-    //     else if () {
-    //         this.handleClose();
-    //         console.log('shit')
-    //     }
-    // };  
+        // console.log('updating')
+        if(prevProps.UI.errors !== this.props.UI.errors) {
+            this.setState({
+                errors: this.props.UI.errors,
+                submitted: true
+            })
+        } 
+        else if (this.props.posts.length > prevProps.posts.length) {
+            this.handleClose();
+            console.log('shit')
+        }
+    };  
 
     handleOpen = () => {
 
@@ -104,7 +106,7 @@ export class CreatePost extends Component {
     handleSubmit = (e) => {
 
         e.preventDefault();
-        this.handleClose();
+        // this.handleClose();
         this.props.createPost({ 
             body: this.state.body
         });
@@ -113,7 +115,9 @@ export class CreatePost extends Component {
     render() {
 
         const { errors } = this.state;
-        const { classes, UI: { loading }} = this.props;        
+        const { classes, UI: { loading }, posts } = this.props;  
+        
+        console.log('posts: ', posts)
 
         return (
             <>
@@ -135,7 +139,7 @@ export class CreatePost extends Component {
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
                             <TextField 
-                                required 
+                                // required 
                                 className={classes.textField}
                                 name="body"
                                 type="text"
@@ -174,6 +178,7 @@ CreatePost.propTypes = {
 
 const mapStateToProps = (state) => ({
     UI: state.UI,
+    posts: state.data.posts
 });
 
 const mapActionsToProps = {
