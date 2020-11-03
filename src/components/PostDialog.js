@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 // Redux
 import { connect } from 'react-redux';
@@ -10,9 +9,10 @@ import { getPost } from '../redux/actions/dataActions';
 // Components
 import TheButton from './Button';
 import LikeButton from './LikeButton';
-
+import Comments from './Comments';
 
 // MUI components
+import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
@@ -26,14 +26,18 @@ import ChatIcon from '@material-ui/icons/Chat';
 
 // Date formatting
 import dayjs from 'dayjs';
-import { compose } from 'redux';
 
 // Styles
-const styles = ({
+const styles = {
 
     invisibleSeparator: {
         border: 'none',
         margin: 4
+    },
+    visibleSeparator: {
+        width: '100%',
+        borderBottom: '1px solid rgba(0,0,0,0.1',
+        marginBottom: 20
     },
     profileImage: {
         maxWidth: 200,
@@ -61,7 +65,7 @@ const styles = ({
         marginTop: 50,
         marginBottom: 50
     }
-});
+};
 
 class PostDialog extends Component {
 
@@ -94,11 +98,13 @@ class PostDialog extends Component {
                 likeCount, 
                 commentCount, 
                 userImage, 
-                userHandle 
+                userHandle,
+                comments
             }, 
             UI: { loading }
         } = this.props;
 
+        // Render spinner or post dialog content
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
                 <CircularProgress size={200} thickness={2} />
@@ -132,6 +138,8 @@ class PostDialog extends Component {
                     </TheButton>
                     <span>{commentCount} Comments</span>
                 </Grid>
+                <hr className={classes.visibleSeparator}/>
+                <Comments comments={comments} />
             </Grid>
         )
 
@@ -165,11 +173,11 @@ PostDialog.propTypes = {
     postId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     post: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-
     post: state.data.post,
     UI: state.UI
 });
