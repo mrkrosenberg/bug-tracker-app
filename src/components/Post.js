@@ -11,8 +11,9 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 // Components
-import TheButton from '../components/Button';
-import DeletePost from '../components/DeletePost';
+import TheButton from './Button';
+import DeletePost from './DeletePost';
+import PostDialog from './PostDialog';
 
 // MUI Components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -136,6 +137,7 @@ function Post(props) {
                     <ChatIcon color="primary" />
                 </TheButton>
                 <span>{commentCount} Comments</span>
+                <PostDialog postId={postId} userHandle={userHandle} />
             </CardContent>
         </Card>
     );

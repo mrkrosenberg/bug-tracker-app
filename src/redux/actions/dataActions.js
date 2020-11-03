@@ -7,7 +7,9 @@ import {
     LIKE_POST, 
     UNLIKE_POST, 
     DELETE_POST, 
-    LOADING_UI 
+    LOADING_UI, 
+    SET_POST ,
+    STOP_LOADING_UI
 } from '../types';
 
 import axios from 'axios';
@@ -29,6 +31,23 @@ export const getPosts = () => (dispatch) => {
                 type: SET_POSTS,
                 payload: []
             })
+        });
+};
+
+// Fetch a single post
+export const getPost = (postId) => (dispatch) => {
+
+    dispatch({ type: LOADING_UI });
+    axios.get(`/posts/${postId}`)
+        .then(res => {
+            dispatch({
+                type: SET_POST,
+                payload: res.data
+            });
+            dispatch({ type: STOP_LOADING_UI })
+        })
+        .catch(err => {
+            console.log(err)
         });
 };
 

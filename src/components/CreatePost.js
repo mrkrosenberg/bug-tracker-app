@@ -164,8 +164,9 @@ export class CreatePost extends Component {
 
 CreatePost.propTypes = {
     createPost: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     UI: PropTypes.object.isRequired,
-
+    posts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
