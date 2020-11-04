@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 // Styles
-const styles = {
+const useStyles = {
     invisibleSeparator: {
         border: 'none',
         margin: 4
@@ -77,4 +77,4 @@ Comments.propTypes = {
     comments: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(Comments);
+export default withStyles(useStyles)(Comments);

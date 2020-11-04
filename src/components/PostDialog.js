@@ -28,7 +28,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import dayjs from 'dayjs';
 
 // Styles
-const styles = {
+const useStyles = {
 
     invisibleSeparator: {
         border: 'none',
@@ -36,7 +36,7 @@ const styles = {
     },
     visibleSeparator: {
         width: '100%',
-        borderBottom: '1px solid rgba(0,0,0,0.1',
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
         marginBottom: 20
     },
     profileImage: {
@@ -66,6 +66,8 @@ const styles = {
         marginBottom: 50
     }
 };
+
+
 function PostDialog(props) {
 
 
@@ -176,4 +178,4 @@ const mapActionsToProps = {
     getPost
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(PostDialog));
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(useStyles)(PostDialog));
