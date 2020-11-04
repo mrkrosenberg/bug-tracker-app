@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
-import { getPost } from '../redux/actions/dataActions';
+import { getPost, clearErrors } from '../redux/actions/dataActions';
 
 // Components
 import TheButton from './Button';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 
 // MUI components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -79,7 +80,8 @@ function PostDialog(props) {
     };
 
     const handleClose = () => {
-        setOpen(false)
+        setOpen(false);
+        props.clearErrors();
     };
 
 
@@ -133,6 +135,7 @@ function PostDialog(props) {
                 <span>{commentCount} Comments</span>
             </Grid>
             <hr className={classes.visibleSeparator}/>
+            <CommentForm postId={postId} />
             <Comments comments={comments} />
         </Grid>
     )
@@ -162,6 +165,7 @@ function PostDialog(props) {
 
 PostDialog.propTypes = {
     getPost: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     postId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     post: PropTypes.object.isRequired,
@@ -175,7 +179,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-    getPost
+    getPost,
+    clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(useStyles)(PostDialog));

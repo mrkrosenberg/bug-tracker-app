@@ -5,7 +5,8 @@ import {
     LOADING_DATA,
     CREATE_POST, 
     DELETE_POST,
-    SET_POST 
+    SET_POST,
+    SUBMIT_COMMENT 
 } from '../types';
 
 const initialState = {
@@ -61,6 +62,14 @@ export default function(state = initialState, action) {
             return {
                 ...state
             };
+        case SUBMIT_COMMENT: 
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: [action.payload, ...state.post.comments]
+                }
+            }
         default:
             return state;
     }
