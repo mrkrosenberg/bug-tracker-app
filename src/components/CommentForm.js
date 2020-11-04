@@ -30,17 +30,11 @@ class CommentForm extends Component {
 
     componentDidUpdate(prevProps) {
   
-        console.log('prev props: ', prevProps)
         if(prevProps.UI.errors !== this.props.UI.errors) {
             this.setState({
                 errors: this.props.UI.errors
             });
         };
-        // if(!this.props.UI.errors && !this.props.UI.loading) {
-        //     this.setState({
-        //         body: ''
-        //     })
-        // }
     };
 
     handleChange = (e) => {

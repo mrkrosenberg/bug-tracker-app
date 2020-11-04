@@ -26,7 +26,9 @@ a {
 .grid-container {
   height: 80vh;
   background-image: url('./images/background.jpg');
+  /* background-attachment: fixed; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  /* overflow-y: scroll; */
 }
