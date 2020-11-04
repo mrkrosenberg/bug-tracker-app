@@ -77,7 +77,6 @@ export const likePost = (postId) => (dispatch) => {
 
     axios.get(`/posts/${postId}/like`)
         .then(res => {
-
             dispatch({
                 type: LIKE_POST,
                 payload: res.data
@@ -134,6 +133,27 @@ export const submitComment = (postId, commentData) => (dispatch) => {
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response.data
+            })
+        })
+};
+
+// Fetch user data
+export const getUserData = (userHandle) => (dispatch) => {
+
+    dispatch({
+        type: LOADING_DATA
+    });
+    axios.get(`/user/${userHandle}`)
+        .then(res => {
+            dispatch({
+                type: SET_POSTS,
+                payload: res.data.posts
+            })
+        })
+        .catch(() => {
+            dispatch({
+                type: SET_POSTS,
+                payload: null
             })
         })
 };
