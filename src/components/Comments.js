@@ -18,17 +18,21 @@ const useStyles = {
     },
     visibleSeparator: {
         width: '100%',
-        borderBottom: '1px solid rgba(0,0,0,0.1',
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
         marginBottom: 20
+    },
+    commentContainer: {
+        padding: 10
     },
     commentImage: {
         maxWidth: '100%',
         height: 100,
         objectFit: 'cover',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        marginLeft: 40
     },
     commentData: {
-        marginLeft: 20
+        marginLeft: 50
     }
 };
 
@@ -39,12 +43,12 @@ function Comments(props) {
 
     return (
         <Grid container>
-            { comments && comments.map(comment => {
+            { comments && comments.map((comment, index) => {
                 
                 const { body, createdAt, userImage, userHandle } = comment;
                 return (
-                    <Fragment key={createdAt}>
-                        <Grid item sm={10}>
+                    <Fragment  key={createdAt}>
+                        <Grid item sm={10} className={classes.commentContainer}>
                             <Grid container>
                                 <Grid item sm={2}>
                                     <img src={userImage} alt="comment" className={classes.commentImage} />
@@ -65,7 +69,9 @@ function Comments(props) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <hr className={classes.visibleSeparator}/>
+                        {index !== comments.length - 1 && (
+                            <hr className={classes.visibleSeparator}/>
+                        )}
                     </Fragment>
                 )
             })}
