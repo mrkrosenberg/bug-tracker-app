@@ -63,11 +63,16 @@ export default function(state = initialState, action) {
                 ...state
             };
         case SUBMIT_COMMENT: 
+            index = state.posts.findIndex(post => post.postId === action.payload.postId);
+            let updatedPosts = JSON.parse(JSON.stringify(state.posts));
+            updatedPosts[index].commentCount += 1;
             return {
                 ...state,
+                posts: updatedPosts,
                 post: {
                     ...state.post,
-                    comments: [action.payload, ...state.post.comments]
+                    comments: [action.payload.comment, ...state.post.comments],
+                    commentCount: state.post.commentCount + 1
                 }
             }
         default:
