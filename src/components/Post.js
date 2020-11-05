@@ -65,8 +65,6 @@ function Post(props) {
         } 
     } = props;
 
-    console.log('open dialog from post.js: ', openDialog)
-
     dayjs.extend(relativeTime);
 
     // Render delete button if current user's post

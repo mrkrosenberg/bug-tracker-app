@@ -76,7 +76,6 @@ function PostDialog(props) {
 
     useEffect(() => {
         if(props.openDialog) {
-            console.log('open dialog from dialog.js: ', props.openDialog)
             handleOpen();
         }
     }, []);

@@ -20,10 +20,8 @@ function Users(props) {
     const [ postIdParam, setPostIdParam ] = useState(null)
     const postId = props.match.params.postId;
 
-    console.log('postId from users: ', postId)
-
+    // Check to prevent infinite loops and re-renders
     if(postId !== postIdParam) {
-        console.log('setting post param id from params')
         setPostIdParam(postId);
     };
 
@@ -49,16 +47,14 @@ function Users(props) {
             <p>No posts from this user</p>
         ) : !postIdParam ? (
             posts.map(post => {
-                console.log('returned with no post id param')
                 return <Post key={post.postId} post={post} />
             })
         ) : (
             posts.map(post => {
                 if(post.postId !== postIdParam) {
-                    console.log('returned without opendialog')
                     return <Post key={post.postId} post={post} />
                 } else {
-                    console.log('returned with opendialog')
+                    // return post component with openDialog prop that will be true only if this is the post selected
                     return <Post key={post.postId} post={post} openDialog />
                 }
             })
