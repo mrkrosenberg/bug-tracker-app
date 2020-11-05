@@ -83,6 +83,11 @@ function PostDialog(props) {
 
     const handleOpen = () => {
 
+        const { userHandle, postId } = props;
+
+        if(oldPath === newPath) {
+            setOldPath(`/users/${userHandle}`)
+        };
         window.history.pushState(null, null, newPath);
         setOpen(true);
         props.getPost(props.postId);
