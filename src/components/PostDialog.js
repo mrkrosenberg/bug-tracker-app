@@ -71,8 +71,9 @@ const useStyles = {
 
 function PostDialog(props) {
 
-
     const [ open, setOpen ] = useState(false);
+    const [ oldPath, setOldPath ] = useState(window.location.pathname);
+    const [ newPath, setNewPath ] = useState(`/users/${props.userHandle}/post/${props.postId}`);
 
     useEffect(() => {
         if(props.openDialog) {
@@ -81,11 +82,14 @@ function PostDialog(props) {
     }, []);
 
     const handleOpen = () => {
+
+        window.history.pushState(null, null, newPath);
         setOpen(true);
         props.getPost(props.postId);
     };
 
     const handleClose = () => {
+        window.history.pushState(null, null, oldPath)
         setOpen(false);
         props.clearErrors();
     };
