@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 // Components
 import IconButton from './Button';
 import CreatePost from './CreatePost';
+import Notifications from './Notifications';
 
 // MUI Components
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +17,6 @@ import Button from '@material-ui/core/Button';
 
 // Icons
 import HomeIcon from '@material-ui/icons/Home';
-import Notifications from '@material-ui/icons/Notifications';
 
 
 export class Navbar extends Component {
@@ -36,9 +36,7 @@ export class Navbar extends Component {
                                         <HomeIcon color="primary" />
                                     </IconButton>
                                 </Link>
-                                <IconButton tip="Notifications">
-                                    <Notifications color="primary" />
-                                </IconButton>
+                                <Notifications color="primary" />
                             </>
                             ) : (
                             <>
