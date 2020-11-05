@@ -14,7 +14,7 @@ import StaticProfile from '../components/StaticProfile';
 import Grid from '@material-ui/core/Grid';
 
 
-function users(props) {
+function Users(props) {
 
     const [ profile, setProfile ] = useState(null);
 
@@ -30,7 +30,7 @@ function users(props) {
             });
     }, []);
 
-    const { posts, loading } = this.props.data
+    const { posts, loading } = props.data;
 
     // markup for posts
     const postsMarkup = loading ? (
@@ -57,13 +57,17 @@ function users(props) {
                 sm={4}
                 xs={12}
             >
-                <StaticProfile profile={profile} />
+                {profile === null ? (
+                    <p>Loading...</p>
+                ) : (                
+                    <StaticProfile profile={profile} />
+                )}
             </Grid>
         </Grid>
     );
 };
 
-user.propTypes = {
+Users.propTypes = {
     getUserData: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired
 }
@@ -76,4 +80,4 @@ const mapActionsToProps = {
     getUserData
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(users);
+export default connect(mapStateToProps, mapActionsToProps)(Users);

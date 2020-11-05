@@ -53,8 +53,6 @@ class CommentForm extends Component {
         const { classes, authenticated } = this.props;
         const { errors } = this.state;
 
-        console.log('errors: ', errors)
-
         const commentFormMarkup = authenticated ? (
             <Grid item sm={10} style={{textAlign: 'center'}}>
                 <form onSubmit={this.handleSubmit}>
