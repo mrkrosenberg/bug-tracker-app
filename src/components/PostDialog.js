@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -73,6 +73,13 @@ function PostDialog(props) {
 
 
     const [ open, setOpen ] = useState(false);
+
+    useEffect(() => {
+        if(props.openDialog) {
+            console.log('open dialog from dialog.js: ', props.openDialog)
+            handleOpen();
+        }
+    }, []);
 
     const handleOpen = () => {
         setOpen(true);

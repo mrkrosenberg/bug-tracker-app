@@ -46,6 +46,7 @@ function Post(props) {
     // Destructured props
     const { 
         classes, 
+        openDialog,
         post: 
             { 
                 body, 
@@ -63,6 +64,8 @@ function Post(props) {
                 } 
         } 
     } = props;
+
+    console.log('open dialog from post.js: ', openDialog)
 
     dayjs.extend(relativeTime);
 
@@ -101,7 +104,11 @@ function Post(props) {
                     <ChatIcon color="primary" />
                 </TheButton>
                 <span>{commentCount} Comments</span>
-                <PostDialog postId={postId} userHandle={userHandle} />
+                <PostDialog 
+                    postId={postId} 
+                    userHandle={userHandle} 
+                    openDialog={props.openDialog} 
+                />
             </CardContent>
         </Card>
     );
@@ -110,6 +117,7 @@ function Post(props) {
 Post.propTypes = {
     user: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool,
     classes: PropTypes.object.isRequired
 };
 

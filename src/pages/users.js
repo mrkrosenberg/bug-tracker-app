@@ -17,6 +17,15 @@ import Grid from '@material-ui/core/Grid';
 function Users(props) {
 
     const [ profile, setProfile ] = useState(null);
+    const [ postIdParam, setPostIdParam ] = useState(null)
+    const postId = props.match.params.postId;
+
+    console.log('postId from users: ', postId)
+
+    if(postId !== postIdParam) {
+        console.log('setting post param id from params')
+        setPostIdParam(postId);
+    };
 
     useEffect(() => {
         const handle = props.match.params.handle;
@@ -28,7 +37,7 @@ function Users(props) {
             .catch(err => {
                 console.log(err)
             });
-    }, []);
+    }, [postId, postIdParam]);
 
     const { posts, loading } = props.data;
 
@@ -38,8 +47,21 @@ function Users(props) {
     ) : (
         posts === null ? (
             <p>No posts from this user</p>
+        ) : !postIdParam ? (
+            posts.map(post => {
+                console.log('returned with no post id param')
+                return <Post key={post.postId} post={post} />
+            })
         ) : (
-            posts.map(post => <Post key={post.postId} post={post} />)
+            posts.map(post => {
+                if(post.postId !== postIdParam) {
+                    console.log('returned without opendialog')
+                    return <Post key={post.postId} post={post} />
+                } else {
+                    console.log('returned with opendialog')
+                    return <Post key={post.postId} post={post} openDialog />
+                }
+            })
         )
     );
 
