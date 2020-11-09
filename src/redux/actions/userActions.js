@@ -6,7 +6,8 @@ import {
     CLEAR_ERRORS, 
     LOADING_UI, 
     SET_UNAUTHENTICATED, 
-    LOADING_USER 
+    LOADING_USER,
+    MARK_NOTIFICATIONS_READ
 } from '../types';
 
 // Login 
@@ -82,6 +83,7 @@ export const getUserData = () => (dispatch) => {
         })
 };
 
+// Update user image
 export const uploadImage = (formData) => (dispatch) => {
 
     dispatch({ type: LOADING_USER });
@@ -94,6 +96,7 @@ export const uploadImage = (formData) => (dispatch) => {
         })
 };
 
+// Update user info/profile
 export const editUserDetails = (userDetails) => (dispatch) => {
 
     dispatch({ type: LOADING_USER });
@@ -106,6 +109,18 @@ export const editUserDetails = (userDetails) => (dispatch) => {
         })
 };
 
+export const  markNotificationsRead = (notificationIds) => (dispatch) => {
+
+    axios.post('/notifications', notificationIds)
+        .then(res => {
+            dispatch({ type: MARK_NOTIFICATIONS_READ })
+        })
+        .catch(err => {
+            console.log(err)
+        });
+};
+
+// Sets authorization header for axios
 const setAuthorizationHeader = (token) => {
 
     const FBIdToken = `Bearer ${token}`;

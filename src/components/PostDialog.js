@@ -90,9 +90,6 @@ function PostDialog(props) {
         UI: { loading }
     } = props;
 
-    console.log('old path: ', oldPath)
-    console.log('new path: ', newPath)    
-
     useEffect(() => {
         if(props.openDialog) {
             handleOpen();
