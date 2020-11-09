@@ -75,31 +75,6 @@ function PostDialog(props) {
     const [ oldPath, setOldPath ] = useState(window.location.pathname);
     const [ newPath, setNewPath ] = useState(`/users/${props.userHandle}/post/${props.postId}`);
 
-    useEffect(() => {
-        if(props.openDialog) {
-            handleOpen();
-        }
-    }, []);
-
-    const handleOpen = () => {
-
-        const { userHandle, postId } = props;
-
-        if(oldPath === newPath) {
-            setOldPath(`/users/${userHandle}`)
-        };
-        window.history.pushState(null, null, newPath);
-        setOpen(true);
-        props.getPost(props.postId);
-    };
-
-    const handleClose = () => {
-        window.history.pushState(null, null, oldPath)
-        setOpen(false);
-        props.clearErrors();
-    };
-
-
     const { 
         classes, 
         post:  { 
@@ -114,6 +89,35 @@ function PostDialog(props) {
         }, 
         UI: { loading }
     } = props;
+
+    console.log('old path: ', oldPath)
+    console.log('new path: ', newPath)    
+
+    useEffect(() => {
+        if(props.openDialog) {
+            handleOpen();
+        }
+    }, [props.openDialog]);
+
+    const handleOpen = () => {
+
+        const { userHandle, postId } = props;
+
+        if(oldPath === newPath) {
+            setOldPath(`/users/${userHandle}`)
+        };
+        window.history.pushState(null, null, newPath);
+        setOpen(true);
+        props.getPost(props.postId);
+    };
+
+    const handleClose = () => {
+        console.log('closin')
+        window.history.pushState(null, null, oldPath)
+        setOpen(false);
+        props.clearErrors();
+    };
+
 
     // Render spinner or post dialog content
     const dialogMarkup = loading ? (
