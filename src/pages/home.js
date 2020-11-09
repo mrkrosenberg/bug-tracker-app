@@ -12,6 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // Components 
 import Post from '../components/Post';
 import Profile from '../components/Profile';
+import PostSkeleton from '../components/PostSkeleton';
 
 const styles = {
 
@@ -29,7 +30,9 @@ export class home extends Component {
 
         const { classes } = this.props;
         const { posts, loading } = this.props.data;
-        let postsList = !loading ? (posts.map(post => <Post key={post.postId} post={post}/>)) : <p>Loading...</p>;
+        let postsList = !loading ? (
+            posts.map(post => <Post key={post.postId} post={post}/>)
+        ) : <PostSkeleton />;
 
         return (
             <Grid className="grid-container" container spacing={10}>

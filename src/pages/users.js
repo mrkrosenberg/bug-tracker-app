@@ -9,6 +9,7 @@ import { getUserData } from '../redux/actions/dataActions';
 // Components
 import Post from '../components/Post';
 import StaticProfile from '../components/StaticProfile';
+import PostSkeleton from '../components/PostSkeleton';
 
 // MUI components
 import Grid from '@material-ui/core/Grid';
@@ -41,7 +42,7 @@ function Users(props) {
 
     // markup for posts
     const postsMarkup = loading ? (
-        <p>Loading data...</p>
+        <PostSkeleton />
     ) : (
         posts === null ? (
             <p>No posts from this user</p>
