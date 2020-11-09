@@ -71,7 +71,7 @@ function Notifications(props) {
                 <FavoriteIcon color={iconColor} style={{marginRight: 10}} />
             ) : (
                 <ChatIcon color={iconColor} style={{marginRight: 10}} />
-            )
+            );
 
             return (
                 <MenuItem key={note.createdAt} onClick={handleClose}>
@@ -79,7 +79,7 @@ function Notifications(props) {
                     <Typography 
                         component={Link}
                         to={`/users/${note.recipient}/post/${note.postId}`}
-                        color="default"
+                        color="inherit"
                         variant="body1"
                     >
                         {note.sender} {type} your post {time}
@@ -91,7 +91,7 @@ function Notifications(props) {
         <MenuItem onClick={handleClose}>
             No new notifications
         </MenuItem>
-    )
+    );
 
     return (
         <Fragment>
