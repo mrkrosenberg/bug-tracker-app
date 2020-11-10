@@ -27,7 +27,7 @@ import './App.css';
 import themeFile from './styles/globalStyles';
 
 // import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 const theme = createMuiTheme(themeFile);
@@ -57,7 +57,7 @@ if(authToken) {
 function App() {
   return (
     <Provider store={store}>
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <div className="App">
             <Router>
               <Navbar />
@@ -72,7 +72,7 @@ function App() {
               </div>
             </Router>
           </div>
-        </MuiThemeProvider>
+        </ThemeProvider>
     </Provider>
     
   );

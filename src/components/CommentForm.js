@@ -18,6 +18,9 @@ const styles = {
         width: '100%',
         borderBottom: '1px solid rgba(0,0,0,0.1)',
         marginBottom: 20
+    },
+    textField: {
+        margin: '10px auto 10px auto'
     }
 };
 
@@ -54,7 +57,7 @@ class CommentForm extends Component {
         const { errors } = this.state;
 
         const commentFormMarkup = authenticated ? (
-            <Grid item sm={10} style={{textAlign: 'center'}}>
+            <Grid item sm={10} style={{textAlign: 'center', margin: '0 auto'}}>
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         className={classes.textField}
@@ -76,7 +79,7 @@ class CommentForm extends Component {
                         Submit
                     </Button>
                 </form>
-                <hr className={classes.visibleSeparator} />
+                {/* <hr className={classes.visibleSeparator} /> */}
             </Grid>
         ) : null;
     

@@ -10,6 +10,7 @@ import { getUserData } from '../redux/actions/dataActions';
 import Post from '../components/Post';
 import StaticProfile from '../components/StaticProfile';
 import PostSkeleton from '../components/PostSkeleton';
+import ProfileSkeleton from '../components/ProfileSkeleton';
 
 // MUI components
 import Grid from '@material-ui/core/Grid';
@@ -77,7 +78,7 @@ function Users(props) {
                 xs={12}
             >
                 {profile === null ? (
-                    <p>Loading...</p>
+                    <ProfileSkeleton />
                 ) : (                
                     <StaticProfile profile={profile} />
                 )}

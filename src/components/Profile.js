@@ -9,6 +9,7 @@ import { logoutUser, uploadImage } from '../redux/actions/userActions';
 
 // Components
 import EditDetails from './EditDetails';
+import ProfileSkeleton from './ProfileSkeleton';
 
 // MUI Components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -183,7 +184,9 @@ function Profile(props) {
                 </Button>
             </div>
         </Paper>
-    )) : (<p>loading...</p>);
+    )) : (
+        <ProfileSkeleton />
+    );
 
     return profileMarkup;
 };

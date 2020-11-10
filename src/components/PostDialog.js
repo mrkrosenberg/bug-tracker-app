@@ -109,7 +109,6 @@ function PostDialog(props) {
     };
 
     const handleClose = () => {
-        console.log('closin')
         window.history.pushState(null, null, oldPath)
         setOpen(false);
         props.clearErrors();
@@ -152,6 +151,7 @@ function PostDialog(props) {
             </Grid>
             <hr className={classes.visibleSeparator}/>
             <CommentForm postId={postId} />
+            <hr className={classes.visibleSeparator} />
             <Comments comments={comments} />
         </Grid>
     )
