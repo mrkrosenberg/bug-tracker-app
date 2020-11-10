@@ -30,6 +30,8 @@ import themeFile from './styles/globalStyles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
+axios.defaults.baseURL = 'https://us-central1-community-b86b1.cloudfunctions.net/api';
+
 const theme = createMuiTheme(themeFile);
 
 
